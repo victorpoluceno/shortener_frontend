@@ -1,0 +1,8 @@
+set output "/home/vpoluceno/labs/restful-celery-bootstrap/rest_api/load_tests/test_check-20110714T170547/tests.png"
+set title "Successful Tests Per Second"
+set terminal png size 640,540
+set xlabel "Concurrent Users"
+set ylabel "Test/s"
+set grid back
+set xrange [0:201]
+plot "/home/vpoluceno/labs/restful-celery-bootstrap/rest_api/load_tests/test_check-20110714T170547/tests.data" u 1:2 w linespoints lw 2 lt 2 t "STPS"

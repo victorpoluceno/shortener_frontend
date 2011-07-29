@@ -1,0 +1,5 @@
+*.pyc
+*.swp
+*.db
+env_devel
+env_tests

@@ -1,0 +1,8 @@
+queue:
+  type: rabbitmq
+
+db:
+  type: postgresql
+
+www:
+  type: python

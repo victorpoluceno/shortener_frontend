@@ -1,0 +1,6 @@
+[submodule "lib/worker"]
+	path = lib/worker
+	url = git@github.com:victorpoluceno/shortener-worker.git
+[submodule "lib/hub"]
+	path = lib/hub
+	url = git@github.com:victorpoluceno/shortner_hub.git
