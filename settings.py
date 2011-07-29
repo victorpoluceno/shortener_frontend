@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'tastypie',
     'djcelery',
+    'django_jenkins',
     'rest_api',
     'gateway_backend',
 )
