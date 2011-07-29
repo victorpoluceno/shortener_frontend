@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import sys
-sys.path.append('lib/worker/')
-sys.path.append('lib/hub/')
+sys.path.append('lib/shortener_worker/')
 
 from django.core.management import execute_manager
 import imp
