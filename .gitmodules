@@ -1,3 +1,0 @@
-[submodule "lib/worker"]
-	path = lib/worker
-	url = git@github.com:victorpoluceno/shortener_worker.git
