@@ -1,5 +1,7 @@
-from django.conf.urls.defaults import include
+from django.conf.urls.defaults import include, patterns
+
 from tastypie.api import Api
+
 from rest_api.api import UrlResource
 
 v1_api = Api(api_name='v1')
