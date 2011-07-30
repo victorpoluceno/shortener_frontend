@@ -1,3 +1,12 @@
+import json
+import urllib
+
+from django.test import TestCase
+from django.test.client import Client
+
+from django.contrib.auth.models import User
+
+
 class SmokeTest(TestCase):
     def setUp(self):
         self.client = Client()

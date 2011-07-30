@@ -6,12 +6,9 @@ from tastypie.authorization import DjangoAuthorization
 from tastypie.throttle import CacheThrottle
 from tastypie.validation import FormValidation
 
-from celery.execute import send_task
-from celery.result import EagerResult
-
 from gateway_backend.tasks import url_short
+from gateway_backend.models import Url
 
-from rest_api.models import Url
 from rest_api.forms import UrlForm
 
 from django.conf import settings
@@ -21,12 +18,12 @@ class UrlThrottle(CacheThrottle):
     def should_be_throttled(self, identifier, **kwargs):
         try:
             should_be_throttled = settings.SHOULD_BE_THROTTLED
-        except (AttributeError), e:
+        except (AttributeError):
             should_be_throttled = True
 
         if super(UrlThrottle, self).should_be_throttled(identifier, **kwargs) \
                 and should_be_throttled:
-                return True
+            return True
 
         return False
 
@@ -46,7 +43,7 @@ class UrlResource(ModelResource):
 def url_post_save(sender, **kwargs):
     instance = kwargs.get('instance')
     if kwargs.get('created') == True:
-        r = url_short.delay(instance.id)
+        url_short.delay(instance.id)
 
 models.signals.post_save.connect(url_post_save, sender=Url, 
         dispatch_uid='url_create')

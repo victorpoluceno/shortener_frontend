@@ -6,13 +6,6 @@ from django.test.client import Client
 
 from django.contrib.auth.models import User
 
-from tastypie.models import ApiKey
-
-from rest_api.models import Url
-
-from celery.task.sets import subtask
-from celery.task import task
-
 
 class SmokeTest(TestCase):
     def setUp(self):

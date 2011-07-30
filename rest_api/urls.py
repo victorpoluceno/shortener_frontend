@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import include
 from tastypie.api import Api
 from rest_api.api import UrlResource
 
