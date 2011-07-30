@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'tastypie',
     'djcelery',
     'gunicorn',
+    'django_jenkins',
     'rest_api',
     'gateway_backend',
 )
