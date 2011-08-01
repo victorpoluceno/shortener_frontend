@@ -1,0 +1,2 @@
+- Replace gunicorn to uWSGI because dotcloud use it
+- Find a way to avoid requests lib as a requirement

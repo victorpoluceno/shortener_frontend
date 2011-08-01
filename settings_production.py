@@ -1,33 +1,29 @@
 # Django settings for mytest project.
 import os, json
 
-# avoid be throttled when running on test server
-SHOULD_BE_THROTTLED = False
-
 import djcelery
 djcelery.setup_loader()
 
-BROKER_HOST = "localhost"
-BROKER_PORT = 5672
-BROKER_USER = "admin"
-BROKER_PASSWORD = "test"
-BROKER_VHOST = "vpoluceno-desktop"
-#BROKER_USE_SSL = True
+envfilepath = os.path.join(os.environ['HOME'], 'environment.json')
+environment = json.load(open(envfilepath))
 
-#CELERY_SEND_TASK_ERROR_EMAILS = True
-#CELERY_RESULT_BACKEND = "cache"
-#CELERY_CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+BROKER_HOST = environment['DOTCLOUD_QUEUE_AMQP_HOST']
+BROKER_PORT = environment['DOTCLOUD_QUEUE_AMQP_PORT']
+BROKER_USER = environment['DOTCLOUD_QUEUE_AMQP_LOGIN']
+BROKER_PASSWORD = environment['DOTCLOUD_QUEUE_AMQP_PASSWORD']
 
-#CELERYD_SOFT_TASK_TIME_LIMIT = 180
-#CELERYD_POOL = "eventlet"
-#CELERYD_CONCURRENCY = 10
+CELERY_SEND_TASK_ERROR_EMAILS = True
+CELERY_SEND_EVENTS = True
+
+# avoid be throttled when running on test server
+SHOULD_BE_THROTTLED = False
 
 # set CELERY_ALWAYS_EAGER=True before running tests
 TEST_RUNNER = 'djcelery.contrib.test_runner.run_tests' 
 
 PROJECT_DIR = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -35,9 +31,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-envfilepath = os.path.join(os.environ['HOME'], 'environment.json')
-environment = json.load(open(envfilepath))
 
 DATABASES = {
     'default': {
@@ -52,11 +45,6 @@ DATABASES = {
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
@@ -109,7 +97,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#   'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -119,7 +106,6 @@ SECRET_KEY = '671y85xk@_vh!(#*5c^c1(#&r#oz=)4nskjxx*)sr+f-9ru+0c'
 TEMPLATE_LOADERS = (
      'django.template.loaders.filesystem.Loader',
      'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -150,6 +136,7 @@ INSTALLED_APPS = (
     'tastypie',
     'djcelery',
     'rest_api',
+    'gateway_backend',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -186,7 +173,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'core.rest_api': {
+        'rest_api': {
             'handlers': ['console', 'mail_admins'],
             'level': 'INFO',
         },
