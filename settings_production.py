@@ -1,11 +1,11 @@
 # Django settings for mytest project.
 import os, json
 
-import djcelery
-djcelery.setup_loader()
-
 envfilepath = os.path.join(os.environ['HOME'], 'environment.json')
 environment = json.load(open(envfilepath))
+
+import djcelery
+djcelery.setup_loader()
 
 BROKER_HOST = environment['DOTCLOUD_QUEUE_AMQP_HOST']
 BROKER_PORT = environment['DOTCLOUD_QUEUE_AMQP_PORT']
