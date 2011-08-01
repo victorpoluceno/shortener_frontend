@@ -1,7 +1,7 @@
 # Django settings for mytest project.
 import os, json
 
-envfilepath = os.path.join(os.environ['HOME'], 'environment.json')
+envfilepath = os.path.join('/home/dotcloud/environment.json')
 environment = json.load(open(envfilepath))
 
 import djcelery
