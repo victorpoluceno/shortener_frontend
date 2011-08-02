@@ -39,7 +39,10 @@ DATABASES = {
         'USER': environment['DOTCLOUD_DB_SQL_LOGIN'],
         'PASSWORD': environment['DOTCLOUD_DB_SQL_PASSWORD'],
         'HOST': environment['DOTCLOUD_DB_SQL_HOST'],
-        'PORT': environment['DOTCLOUD_DB_SQL_PORT'],
+
+        # use str() to ensure no unicode string on python 2.6 
+        # because psycopg doesnt like it
+        'PORT': str(environment['DOTCLOUD_DB_SQL_PORT']),
     }
 }
 
