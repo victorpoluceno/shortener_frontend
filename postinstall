@@ -1,7 +1,2 @@
 #!/bin/bash
-cd lib/shortener_worker
-if [ -d .git/ ]; then
-    git clone git://github.com/victorpoluceno/shortener_worker.git .
-else
-    git pull
-fi
+git clone git://github.com/victorpoluceno/shortener_worker.git lib/shortener_worker/
